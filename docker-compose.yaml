@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: symfony
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: symfony
+    restart: unless-stopped
+    networks:
+      - app_network
+    ports:
+      - "3306:3306"
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8000:8000"
+      - "9003:9003" # Xdebug
+    networks:
+      - app_network
+    restart: unless-stopped
+
+# Phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8585:80"
+    container_name: phpmyadmin
+    depends_on:
+      - db
+    networks:
+      - app_network
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+    networks:
+      - app_network
+
+volumes:
+  db_data: {}
+
+# Docker Networks
+networks:
+  app_network:
+    driver: bridge
