@@ -38,7 +38,7 @@ docker ps
 ```
 
 ```bash
-docker-compose exec {nom_de_lapp} bash
+docker-compose exec {nom_du_container_ou_id} bash
 ```
 
 ### Créer un nouveau projet symfony
