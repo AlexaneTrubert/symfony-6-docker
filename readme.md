@@ -29,7 +29,7 @@ RUN git config --global user.email "you@example.com" \
 
 Dans le docker-compose.override.yaml, vous pouvez modifier les variables d'environnements.
 
-### Docker-composer
+### Docker-compose
 ```bash
 docker-compose build
 docker-compose up -d
