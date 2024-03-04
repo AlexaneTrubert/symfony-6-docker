@@ -1,4 +1,4 @@
-# Symfony 6 + php 8.3 avec Docker
+# Symfony + php 8.3 avec Docker
 
 ## En local
 
